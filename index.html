@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TimeTracker - Учет времени</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>⏳ TimeTracker</h1>
+            <p class="subtitle">Учет полезного и бесполезного времени</p>
+        </header>
+
+        <main>
+            <!-- Таймеры -->
+            <div class="timers">
+                <div class="timer-card productive">
+                    <h2>Полезное время</h2>
+                    <div class="timer-display" id="productive-timer">00:00:00</div>
+                    <div class="timer-controls">
+                        <button id="start-productive" class="btn start-btn">▶ Старт</button>
+                        <button id="pause-productive" class="btn pause-btn">⏸ Пауза</button>
+                        <button id="reset-all-timers" class="btn reset-btn">↻ Сброс</button>
+                    </div>
+                </div>
+
+                <div class="timer-card unproductive">
+                    <h2>Бесполезное время</h2>
+                    <div class="timer-display" id="unproductive-timer">00:00:00</div>
+                    <button id="reset-all" class="btn finish-btn">🌙 Завершить день</button>
+                </div>
+            </div>
+
+            <!-- Отсчет перед сном -->
+            <div id="sleep-countdown" class="sleep-countdown hidden">
+                <div class="countdown-box">
+                    <h2>Подготовка ко сну</h2>
+                    <p>Отбой через: <span id="countdown">5</span> сек.</p>
+                    <button id="cancel-sleep" class="btn cancel-btn">✖ Отменить</button>
+                </div>
+            </div>
+
+            <!-- Статистика -->
+            <div id="stats" class="stats hidden">
+                <h2>📊 Ваша статистика</h2>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>Общее время</h3>
+                        <p id="total-time" class="stat-value">00:00:00</p>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <h3>Продуктивность</h3>
+                        <div class="pie-chart-container">
+                            <canvas id="productivityChart" width="200" height="200"></canvas>
+                            <div class="chart-labels">
+                                <div class="chart-label productive">
+                                    <span class="label-color"></span>
+                                    <span id="productive-percent">0%</span> Полезно
+                                </div>
+                                <div class="chart-label unproductive">
+                                    <span class="label-color"></span>
+                                    <span id="unproductive-percent">0%</span> Бесполезно
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <h3>Ваш результат</h3>
+                        <p id="motivation" class="motivation-text">Анализируем ваш день...</p>
+                        <p id="advice" class="advice-text"></p>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <h3>Временные метки</h3>
+                        <p id="start-time">⏱ Начало: --:--</p>
+                        <p id="end-time">⏱ Окончание: --:--</p>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <h3>Активность</h3>
+                        <p id="longest-session">⭐ Лучший сеанс: 00:00</p>
+                        <p id="breaks-count">🔄 Перерывов: 0</p>
+                    </div>
+                </div>
+                
+                <div class="activity-log" id="activity-log">
+                    <h3>📝 История активности</h3>
+                    <!-- Сюда добавляются записи -->
+                </div>
+                
+                <button id="start-new-day" class="btn new-day-btn">🔄 Начать новый день</button>
+            </div>
+        </main>
+    </div>
+
+    <!-- История дней -->
+    <div id="history-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>История дней</h2>
+            <div id="history-list"></div>
+        </div>
+    </div>
+
+    <button id="show-history" class="btn history-btn">📅 История</button>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
